@@ -7,6 +7,30 @@
  */
 
 // ============================================================================
+// IMPORTACIONES DE TIPOS
+// ============================================================================
+
+import type {CSSProperties, JSX} from "react";
+
+// ============================================================================
+// INTERFACES Y TIPOS
+// ============================================================================
+
+/**
+ * Interface para definir la estructura de una dirección
+ * @interface AddressInfo
+ * @description Define los campos obligatorios para la información de dirección
+ */
+interface AddressInfo {
+  /** Nombre de la calle o dirección específica */
+  street: string;
+  /** Ciudad de residencia */
+  city: string;
+  /** País de residencia */
+  country: string;
+}
+
+// ============================================================================
 // CONSTANTES DE DATOS PERSONALES
 // ============================================================================
 
@@ -14,39 +38,63 @@
  * Nombre del usuario
  * @type {string}
  */
-const name = "Alonso"
+const name: string = "Alonso"
 
 /**
  * Apellido del usuario
  * @type {string}
  */
-const lastName = "Anchante"
+const lastName: string = "Anchante"
 
 /**
  * Lista de juegos favoritos del usuario
  * @type {string[]}
  * @description Array que contiene los videojuegos preferidos
  */
-const favoriteGames = ["League of Legends", "Valorant", "Fortnite"]
+const favoriteGames: string[] = ["League of Legends", "Valorant", "Fortnite"]
 
 /**
  * Estado de actividad del usuario
  * @type {boolean}
  * @description Indica si el usuario está activo (true) o inactivo (false)
  */
-const isActive = true
+const isActive: boolean = false
 
 /**
  * Información de dirección del usuario
- * @type {Object}
- * @property {string} street - Nombre de la calle
- * @property {string} city - Ciudad de residencia
- * @property {string} country - País de residencia
+ * @type {AddressInfo}
+ * @description Objeto que contiene los datos de ubicación del usuario
+ * @see {AddressInfo} - Interface que define la estructura
  */
-const address = {
+const address: AddressInfo = {
   street: "Calle 123",
   city: "Madrid",
   country: "España"
+}
+
+/**
+ * Estilos CSS personalizados para el elemento de dirección
+ * @type {CSSProperties}
+ * @description Objeto que contiene estilos inline con lógica condicional
+ * basada en el estado de actividad del usuario
+ * 
+ * @property {string} backgroundColor - Color de fondo gris claro
+ * @property {string} padding - Espaciado interno de 10px
+ * @property {string} borderRadius - Radio del borde condicional:
+ *   - 5px si el usuario está activo
+ *   - 30px si el usuario está inactivo
+ * @property {string} marginTop - Margen superior de 10px
+ * 
+ * @example
+ * // Los estilos cambian dinámicamente según isActive:
+ * // isActive = true  -> borderRadius: '5px'  (esquinas menos redondeadas)
+ * // isActive = false -> borderRadius: '30px' (esquinas muy redondeadas)
+ */
+const myStiles: CSSProperties = {
+  backgroundColor: 'lightgray',
+  padding: '10px',
+  borderRadius: isActive ? '5px' : '30px', // Estilo condicional basado en actividad
+  marginTop: '10px'
 }
 
 // ============================================================================
@@ -72,8 +120,16 @@ const address = {
  * - Incluye cálculo matemático simple
  * - Renderizado condicional para estado de actividad
  * - Serialización JSON de objeto dirección
+ * - Estilos dinámicos basados en el estado de actividad
+ * - Tipado fuerte con TypeScript e interfaces personalizadas
+ * 
+ * @technical_details
+ * - Utiliza CSSProperties para tipado de estilos
+ * - Implementa lógica condicional en estilos CSS
+ * - Usa AddressInfo interface para tipado de dirección
+ * - Emplea Fragment como contenedor raíz
  */
-export const MyAwesomeApp = () => {
+export const MyAwesomeApp = (): JSX.Element => {
   return (
     <>
       {/* Título principal con el nombre del usuario */}
@@ -91,8 +147,10 @@ export const MyAwesomeApp = () => {
       {/* Estado de actividad usando renderizado condicional */}
       <h1>{isActive ? 'Activo' : 'No Activo'}</h1>
 
-      {/* Información de dirección serializada como JSON */}
-      <p>{JSON.stringify(address)}</p>
+      {/* Información de dirección serializada como JSON con estilos dinámicos */}
+      <p
+        style={myStiles} // Aplica estilos condicionales basados en isActive
+      >{JSON.stringify(address)}</p>
     </>
   )
 }
