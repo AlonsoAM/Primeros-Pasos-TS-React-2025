@@ -1,14 +1,26 @@
 // import {MyAwesomeApp} from "./MyAwesomeApp.tsx";
 import {ItemCounter} from "./shopping-car/ItemCounter.tsx";
 
+interface ItemInCart {
+  productName: string
+  quantity: number
+}
+
+const itemsInCart: ItemInCart[] = [
+  {productName: 'Nintendo Switch', quantity: 2},
+  {productName: 'Playstation 5', quantity: 1},
+  {productName: 'Xbox Series X', quantity: 3},
+  {productName: 'PC Gaming', quantity: 1},
+]
+
 export const FirstStepsApp = () => {
   return (
     <>
       {/* <MyAwesomeApp/>*/}
       <h1>Carrito de Compras</h1>
-      <ItemCounter name={'Nintendo Switch'} quantity={2}/>
-      <ItemCounter name={'Playstation 5'} quantity={1}/>
-      <ItemCounter name={'Xbox Series X'} quantity={3}/>
+      {itemsInCart.map(({productName, quantity}) => (
+        <ItemCounter key={productName} name={productName} quantity={quantity}/>
+      ))}
     </>
 
   )
