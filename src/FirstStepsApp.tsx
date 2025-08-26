@@ -1,5 +1,5 @@
 // import {MyAwesomeApp} from "./MyAwesomeApp.tsx";
-import {ItemCounter} from "./shopping-car/ItemCounter.tsx";
+import {ItemCounter} from "./shopping-cart/ItemCounter.tsx";
 
 interface ItemInCart {
   productName: string
